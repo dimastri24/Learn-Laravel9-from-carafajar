@@ -35,3 +35,14 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
 -   Untuk Tambah column, di cli nya kita kasih nama sejelas" nya misal `php artisan make:migration add_gender_column_to_students_table`. Suffix agar ke detect table mana yg mau diubah dengan kasih namatable_table di akhir.
 -   Cara rollback. `php artisan migrate:rollback` ini bakal rollback satu batch. Rollback ke batch tertentu `php artisan migrate:rollback --step=2`. Sama dengan 2 brarti semua akan ke rollback sampe termasuk batch 2. Nanti pas di migrate lagi akan jadi satu batch.
 -   Untuk Update column kita perlu install `composer require doctrine/dbal` terlebih dahulu. cli nya sama seperti kita nambah kolom krn jatuhnya update table juga.
+
+### MVC
+
+-   Model dan Controller, dalam dokumentasi cek langsung ke bagian `Eloquent ORM/Getting Started` untuk Model dan `The Basics/Controller` utk Controller nya. Disini hanya basic standar bgt agar model nya jalan, lebih lanjutnya di pembahasan selanjutnya kalau ada yang dipakai.
+-   Basic bikin model `php artisan make:model Student`.
+-   Basic bikin controller `php artisan make:controller StudentController`.
+-   View sudah cukup dibahas basic nya pada blade template
+-   Bagaimana data di pass dari database hingga ke page.
+    <br>Request -> Route -> Controller -> Model -> Database -> Model -> Controller -> View -> Response
+    <br> Contoh nya bisa disaksikan langsung tentang Student
+-   Query data ada 3 cara, eloquent query (recommend), query builder(ok), row builder(not recommend)
