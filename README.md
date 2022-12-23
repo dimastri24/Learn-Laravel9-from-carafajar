@@ -47,10 +47,14 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
     <br> Contoh nya bisa disaksikan langsung tentang Student
 -   Query data ada 3 cara, eloquent query (recommend), query builder(ok), row builder(not recommend)
 
-### Database Seeding
+### Database Seeding + Factory (Faker)
 
 -   Disini nyelesain bikin mvc untuk Class. Kemudian kita truncate isi table students sama class.
 -   Seeding dilakukan utk load data sample ke database -> table yang kosong. Biasanya saat abis pull atau clone, kita gk punya data database nya. Jadi kita inject mass dulu dgn seeder ini.
 -   Bikin seeder `php artisan make:seeder ClassSeeder`.
 -   Basic Run seeder `php artisan db:seed --class=ClassSeeder`.
 -   Multiple seeding, panggil class seeder yg lain di DatabaseSeeder.php. Abis itu run dengan `php artisan db:seed`. Jangan lupa parent table di atas child table agar di run duluan biar gk error foreign key nya.
+-   Mulai dari sini kemungkinan udh gk nulis manual comman artisan nya, tapi kita pakai extension.
+-   Project laravel udh include Faker di --dev, tapi disini aku mau update pake yg versi baru Faker nya jadi ku install ulang.
+-   Kita generate Factory nya pake artisan. Abis itu kita bikin rule untuk generate data nya, gk semua harus dari faker, tapi faker dpt membantu ngisi. Setelah itu kita create di Seeder nya.
+-   Tambahan, aku ganti timezone jadi ke jakarta, di dalem /config/app.php dan /app/Providers/AppServiceProvider.php
