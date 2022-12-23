@@ -46,3 +46,11 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
     <br>Request -> Route -> Controller -> Model -> Database -> Model -> Controller -> View -> Response
     <br> Contoh nya bisa disaksikan langsung tentang Student
 -   Query data ada 3 cara, eloquent query (recommend), query builder(ok), row builder(not recommend)
+
+### Database Seeding
+
+-   Disini nyelesain bikin mvc untuk Class. Kemudian kita truncate isi table students sama class.
+-   Seeding dilakukan utk load data sample ke database -> table yang kosong. Biasanya saat abis pull atau clone, kita gk punya data database nya. Jadi kita inject mass dulu dgn seeder ini.
+-   Bikin seeder `php artisan make:seeder ClassSeeder`.
+-   Basic Run seeder `php artisan db:seed --class=ClassSeeder`.
+-   Multiple seeding, panggil class seeder yg lain di DatabaseSeeder.php. Abis itu run dengan `php artisan db:seed`. Jangan lupa parent table di atas child table agar di run duluan biar gk error foreign key nya.
