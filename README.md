@@ -70,3 +70,10 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
     <br><br>
 -   Penjelasannya ada di dokumentasi `/Digging Deeper/Collections/Available Methods`
 -   Intinya sih method collection ini bakal ngebantu kita kalo lagi query atau pokoknya ngurus data.
+
+### Eloquent Relationship & N+1 Problem (Lazy vs Eager)
+
+-   Pertama yg mesti kita lakuin adalah defining relationship antar table nya
+-   Contoh disini relation students dgn class adalah many to one, jadi di model students kita define one to many inverse / `belongsTo()`
+-   Sebaliknya class dengan students adalah one to many, jadi kita pake `hasMany()`
+-   Yang terjadi dibelakang adalah pemanggilan join table dan secara default adalah lazy. Contoh pertama kita pakai eager. Hal ini dilakukan di controller nya

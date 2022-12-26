@@ -17,4 +17,12 @@ class Student extends Model
     protected $fillable = [
         'name', 'gender', 'nis', 'class_id'
     ];
+
+
+    public function class()
+    {
+        // sebenernya kalo dah ikutin naming nya gk perlu di input parameter foreign key ama owner key nya
+        // seperti yg kali ini, tapi tetep aku tulis aja
+        return $this->belongsTo(ClassRoom::class, 'class_id', 'id');
+    }
 }
