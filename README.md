@@ -27,6 +27,7 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
 ### ENV & Database Migration
 
 -   File .env digunakan sebagai source config bagi kita, dan di dalamnya dpt berisi hal yg sensitive. Jadi di gitignore dan bila kita mau pull ya harus kita bikin dulu file nya. Ini [Link contoh file .env](https://github.com/laravel/laravel/blob/master/.env.example). Data yg ada di .env akan di retrieve oleh file yang bersangkutan di dalam folder /config/
+    <br><br>
 -   Database Migrate adalah semacam version control untuk database seperti git.
 -   Cara migrate database. Bikin database dulu, terus ketik cli `php artisan migrate` untuk bikin semua table yang dah disiapin. Cli ini juga dipakai setiap abis bikin atau update table baru, agar dibuatkan ke database nya.
 -   Cara bikin table `php artisan make:migration create_students_table`. Agar di generate otomatis, ikutin suffix nya create_namatable_table. Nama table sebaiknya plural.
@@ -54,14 +55,18 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
 -   Bikin seeder `php artisan make:seeder ClassSeeder`.
 -   Basic Run seeder `php artisan db:seed --class=ClassSeeder`.
 -   Multiple seeding, panggil class seeder yg lain di DatabaseSeeder.php. Abis itu run dengan `php artisan db:seed`. Jangan lupa parent table di atas child table agar di run duluan biar gk error foreign key nya.
+    <br><br>
 -   Mulai dari sini kemungkinan udh gk nulis manual comman artisan nya, tapi kita pakai extension.
 -   Project laravel udh include Faker di --dev, tapi disini aku mau update pake yg versi baru Faker nya jadi ku install ulang.
 -   Kita generate Factory nya pake artisan. Abis itu kita bikin rule untuk generate data nya, gk semua harus dari faker, tapi faker dpt membantu ngisi. Setelah itu kita create di Seeder nya.
 -   Tambahan, aku ganti timezone jadi ke jakarta, di dalem /config/app.php dan /app/Providers/AppServiceProvider.php
 
-### Query Builder vs Eloquent
+### Query Builder vs Eloquent & Collection Methods
 
 -   Query builder lebih friendly bagi yg php vanilla atau suka pindah" bahasa tapi kuat basic nya karena masih dekat mainan dgn query dan function nya mudah dipahami.
 -   Eloquent bentuknya function semua jadi mesti hapalan tapi baiknya bolak balik dokumen. Lebih disarankan jika udh pake framework krn lebih aman dan function nya lebih ringkas.
 -   Basic perbandingan ada di /app/Http/Controllers/StudentController.php
 -   Kalau basic crud nya sih gk beda jauh ya tapi mungkin kalo dah mass query atau where clause nya ribet atau dah joinan jadi baru kerasa bedanya.
+    <br><br>
+-   Penjelasannya ada di dokumentasi `/Digging Deeper/Collections/Available Methods`
+-   Intinya sih method collection ini bakal ngebantu kita kalo lagi query atau pokoknya ngurus data.
