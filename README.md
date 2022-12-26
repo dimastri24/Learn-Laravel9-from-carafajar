@@ -77,3 +77,24 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
 -   Contoh disini relation students dgn class adalah many to one, jadi di model students kita define one to many inverse / `belongsTo()`
 -   Sebaliknya class dengan students adalah one to many, jadi kita pake `hasMany()`
 -   Yang terjadi dibelakang adalah pemanggilan join table dan secara default adalah lazy. Contoh pertama kita pakai eager. Hal ini dilakukan di controller nya
+    <br><br>
+-   Dasar perbedaan lazy dan eager adalah cara request data nya. Sebenernya ini berlaku di framework apapun dan konsep nya sama
+-   gambaran apa yg terjadi dibelakang
+
+```
+lazy load
+select * from table class
+select * from student where class = 1A
+select * from student where class = 1B
+select * from student where class = 1C
+select * from student where class = 1D
+```
+
+```
+eager load
+select * from table class
+select * from student where class in (1A, 1B, 1C, 1D)
+```
+
+-   Masing" punya kelebihan dan kekurangan. Kapan penggunaannya tergantung scenario dan kebutuhan. Lebih jelas nya searching lagi aja di gugel, krn bakal panjang kalo di sini dan itu topik berbeda dgn materi laravel.
+-   Disini kita install clockwork di project dan browser kita untuk liat performance dan query nya.
