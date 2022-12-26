@@ -4,7 +4,7 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
 
 [Documentation Laravel 9](https://laravel.com/docs/9.x)
 
-## Branch Content
+## Branch Content (include commit)
 
 ### Master
 
@@ -58,3 +58,10 @@ Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
 -   Project laravel udh include Faker di --dev, tapi disini aku mau update pake yg versi baru Faker nya jadi ku install ulang.
 -   Kita generate Factory nya pake artisan. Abis itu kita bikin rule untuk generate data nya, gk semua harus dari faker, tapi faker dpt membantu ngisi. Setelah itu kita create di Seeder nya.
 -   Tambahan, aku ganti timezone jadi ke jakarta, di dalem /config/app.php dan /app/Providers/AppServiceProvider.php
+
+### Query Builder vs Eloquent
+
+-   Query builder lebih friendly bagi yg php vanilla atau suka pindah" bahasa tapi kuat basic nya karena masih dekat mainan dgn query dan function nya mudah dipahami.
+-   Eloquent bentuknya function semua jadi mesti hapalan tapi baiknya bolak balik dokumen. Lebih disarankan jika udh pake framework krn lebih aman dan function nya lebih ringkas.
+-   Basic perbandingan ada di /app/Http/Controllers/StudentController.php
+-   Kalau basic crud nya sih gk beda jauh ya tapi mungkin kalo dah mass query atau where clause nya ribet atau dah joinan jadi baru kerasa bedanya.
