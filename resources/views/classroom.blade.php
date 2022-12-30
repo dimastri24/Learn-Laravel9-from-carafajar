@@ -1,5 +1,5 @@
 @extends('layouts.mainlayout')
-@section('title', 'Students')
+@section('title', 'Class')
 
 @section('content')
 <h1>Ini Halaman Students</h1>
@@ -9,9 +9,7 @@
         <tr>
             <th>No.</th>
             <th>Name</th>
-            <th>Jumlah</th>
-            <th>Students</th>
-            <th>Homeroom Teacher</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -19,14 +17,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$data->name}}</td>
-            <td>{{$data->students->count()}}</td>
-            <td>
-                @foreach($data->students as $student)
-                {{-- {{$student['name']}}, --}}
-                <li>{{$student->name}}</li>
-                @endforeach
-            </td>
-            <td>{{$data->homeroomTeacher->name}}</td>
+            <td><a href="class/{{$data->id}}">detail</a></td>
         </tr>
         @endforeach
     </tbody>

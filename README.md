@@ -109,3 +109,8 @@ select * from student where class in (1A, 1B, 1C, 1D)
 -   Nested relationship, intinya tuh bikin relation gk langsung. Disini contohnya students manggil teachers tapi lewat class krn mereka gk ada relation langsung sedangkan class dan teacher punya.
 -   Cara manggil nya di controller kita panggil function dari model yg mau di join. Di StudentController, `with()`kan isinya manggil relation, nah disitu kita panggil `class.homeroomTeacher` yg awalnya cuma `class` (table) jadi ada `homeroomTeacher` function di dalem model Class. Saat kita mau tampilin juga sama yg dipanggil function nya.
 -   Kalo dilihat return array nya dia berupa object, jadi sama aja kyk yg biasa kita tahu.
+
+### Halaman Detail
+
+-   Branch ini gk byk teori atau feature dari laravel. Disini kita cuma bikin detail page sama bebenahin page lain.
+-   karena kita bikin detail page, jadi kita update bikin mvc baru utk detail page nya.

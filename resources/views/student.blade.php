@@ -1,8 +1,8 @@
 @extends('layouts.mainlayout')
-@section('title', 'Students')
+@section('title', 'Student')
 
 @section('content')
-<h1>Ini Halaman Students</h1>
+<h1>Ini Halaman Student</h1>
 <h3>Student List</h3>
 
 <table class="table mb-5">
@@ -12,9 +12,7 @@
             <th>Name</th>
             <th>NIS</th>
             <th>Gender</th>
-            <th>Class</th>
-            <th>Extracurriculars</th>
-            <th>HomeRoomTeacher</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -24,13 +22,7 @@
             <td>{{$data->name}}</td>
             <td>{{$data->nis}}</td>
             <td>{{$data->gender}}</td>
-            <td>{{$data->class['name']}}</td>
-            <td>
-                @foreach ($data->extracurriculars as $item)
-                - {{$item->name}} <br>
-                @endforeach
-            </td>
-            <td>{{$data->class->homeroomTeacher->name}}</td>
+            <td><a href="student/{{$data->id}}">detail</a></td>
         </tr>
         @endforeach
     </tbody>

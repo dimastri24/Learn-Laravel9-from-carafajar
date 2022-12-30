@@ -20,15 +20,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home', [
         'name' => 'Dimas Tri Raharjo',
-        'role' => 'manajemen',
+        'role' => 'admin',
         'buah' => ['pisang', 'apel', 'jeruk', 'semangka', 'mangga'],
     ]);
 });
 
 Route::get('/students', [StudentController::class, 'index']);
+Route::get('/student/{id}', [StudentController::class, 'show']);
 
 Route::get('/class', [ClassController::class, 'index']);
+Route::get('/class/{id}', [ClassController::class, 'show']);
 
 Route::get('/extracurricular', [ExtracurricularController::class, 'index']);
+Route::get('/extracurricular/{id}', [ExtracurricularController::class, 'show']);
 
 Route::get('/teacher', [TeacherController::class, 'index']);
+Route::get('/teacher/{id}', [TeacherController::class, 'show']);
