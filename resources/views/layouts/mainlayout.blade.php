@@ -20,17 +20,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item px-3">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item px-3">
                         <a class="nav-link" href="/students">Students</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item px-3">
                         <a class="nav-link" href="/class">Class</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item px-3">
                         <a class="nav-link" href="/extracurricular">Extracurricular</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/teacher">Teacher</a>
                     </li>
                 </ul>
             </div>

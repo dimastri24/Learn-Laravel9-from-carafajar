@@ -11,6 +11,7 @@
             <th>Name</th>
             <th>Jumlah</th>
             <th>Students</th>
+            <th>Homeroom Teacher</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
                 <li>{{$student->name}}</li>
                 @endforeach
             </td>
+            <td>{{$data->homeroomTeacher->name}}</td>
         </tr>
         @endforeach
     </tbody>

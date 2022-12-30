@@ -14,6 +14,7 @@
             <th>Gender</th>
             <th>Class</th>
             <th>Extracurriculars</th>
+            <th>HomeRoomTeacher</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
                 - {{$item->name}} <br>
                 @endforeach
             </td>
+            <td>{{$data->class->homeroomTeacher->name}}</td>
         </tr>
         @endforeach
     </tbody>
