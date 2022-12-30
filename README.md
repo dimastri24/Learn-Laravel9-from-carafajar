@@ -98,3 +98,11 @@ select * from student where class in (1A, 1B, 1C, 1D)
 
 -   Masing" punya kelebihan dan kekurangan. Kapan penggunaannya tergantung scenario dan kebutuhan. Lebih jelas nya searching lagi aja di gugel, krn bakal panjang kalo di sini dan itu topik berbeda dgn materi laravel.
 -   Disini kita install clockwork di project dan browser kita untuk liat performance dan query nya.
+    <br><br>
+-   Tambahan mengenai clockwork. Secara default dia gk nyala kalo running, tapi dia otomatis nyala kalo running nya mode debug. Bisa dilihat dalem file .env nya gini `APP_DEBUG=true`, jadi kalo nanti deploy jgn lupa di false. Jadi cara agar disable clockwork nya biar gk generate log bisa kita tulis gini `CLOCKWORK_ENABLE=false` di .env, biar clockwork nya aja yg mati tapi tetep running mode debug.
+
+### Many to Many Relationship & Nested Relationship
+
+-   Disini gk byk penjelasan krn cukup jelas hanya cara penerapan relationship di laravel ini
+-   Cara nerapin relationship disini itu emang beda, jadi kita nge define relation nya belakangan. Tapi cara gini jadi lebih mudah dipahami karena pendekatan ke database nya. Kita bikin foreign nya manual di dalem migration terus baru kita define bahwa ini punya relation di model nya.
+-   Define Many to many dgn `belongsToMany()` di dalem model nya.

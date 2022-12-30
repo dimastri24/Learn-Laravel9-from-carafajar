@@ -13,6 +13,7 @@
             <th>NIS</th>
             <th>Gender</th>
             <th>Class</th>
+            <th>Extracurriculars</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,11 @@
             <td>{{$data->nis}}</td>
             <td>{{$data->gender}}</td>
             <td>{{$data->class['name']}}</td>
+            <td>
+                @foreach ($data->extracurriculars as $item)
+                - {{$item->name}} <br>
+                @endforeach
+            </td>
         </tr>
         @endforeach
     </tbody>
