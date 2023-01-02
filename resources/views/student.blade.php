@@ -27,7 +27,7 @@
             <td>{{$data->name}}</td>
             <td>{{$data->nis}}</td>
             <td>{{$data->gender}}</td>
-            <td><a href="student/{{$data->id}}">detail</a></td>
+            <td><a href="student/{{$data->id}}">detail</a> | <a href="student-edit/{{$data->id}}">edit</a></td>
         </tr>
         @endforeach
     </tbody>

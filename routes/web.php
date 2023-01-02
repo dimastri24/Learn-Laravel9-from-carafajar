@@ -29,8 +29,11 @@ Route::get('/students', [StudentController::class, 'index']);
 Route::get('/student/{id}', [StudentController::class, 'show']);
 Route::get('/student-add', [StudentController::class, 'create']);
 Route::post('/student', [StudentController::class, 'store']);
+Route::get('/student-edit/{id}', [StudentController::class, 'edit']);
+Route::put('/student/{id}', [StudentController::class, 'update']);
 
 Route::post('/ekskul-add', [StudentController::class, 'addEkskul']);
+Route::post('/ekskul-edit', [StudentController::class, 'editEkskul']);
 
 Route::get('/class', [ClassController::class, 'index']);
 Route::get('/class/{id}', [ClassController::class, 'show']);

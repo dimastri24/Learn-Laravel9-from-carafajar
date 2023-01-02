@@ -49,4 +49,31 @@ class StudentController extends Controller
         $student->extracurriculars()->attach($request->extracurricular_id);
         return redirect('/students');
     }
+
+    public function edit($id)
+    {
+        $student = Student::with('class')->findOrFail($id);
+        $class = ClassRoom::get(['id', 'name']);
+        return view('student-edit', ['student' => $student, 'class' => $class,]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+        // $student->name = $request->name;
+        // $student->gender = $request->gender;
+        // $student->nis = $request->nis;
+        // $student->class_id = $request->class_id;
+        // $student->save();
+        $student->update($request->all());
+    }
+
+    public function editEkskul(Request $request)
+    {
+        $ekskulList = $request->extracurricular_id;
+        // dd($ekskulList[0]);
+        $student = Student::find($request->student_id);
+        $student->extracurriculars()->sync($ekskulList);
+        return redirect()->back();
+    }
 }

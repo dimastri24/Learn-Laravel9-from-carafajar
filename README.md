@@ -119,4 +119,4 @@ select * from student where class in (1A, 1B, 1C, 1D)
 
 -   Basic CRUD di laravel dgn eloquent. Mulai dari insert, update, delete, soft delete, flash message dan validation.
 -   Pertama insert data student, disini tambahan aku nyoba sendiri add ekskul student nya krn dia many to many.
--
+-   Kedua kita update data student, aku juga nyoba update ekskul student nya menggunakan `sync()`.

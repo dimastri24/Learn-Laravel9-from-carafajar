@@ -37,26 +37,51 @@
         </td>
     </tr>
 </table>
-{{$ekskul}}
+{{-- {{$ekskul}} --}}
 {{-- <a href="ekskul-add/{{$student->id}}" class="btn btn-success">Add Extracurricular</a> --}}
-<div class="my-5 col-6 bg-light p-5 rounded">
-    <p class="h3">Add New Extracurriculars</p>
-    <form action="/ekskul-add" method="POST">
-        @csrf
-        <div class="mb-3">
+<div class="row my-5 justify-content-between">
+    <div class="col-5 bg-light p-3 rounded">
+        <p class="h3">Add New Extracurriculars</p>
+        <form action="/ekskul-add" method="POST">
+            @csrf
+            <div class="mb-3">
+                <input type="hidden" name="student_id" value="{{$student->id}}">
+                <label for="ekskul">Extracurriculars</label>
+                <select name="extracurricular_id" id="ekskul" class="form-control" required>
+                    <option>Select One</option>
+                    @foreach ($ekskul as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-5 bg-light p-3 rounded">
+        <p class="h3">Update Extracurriculars</p>
+        <form action="/ekskul-edit" method="POST">
+            @csrf
             <input type="hidden" name="student_id" value="{{$student->id}}">
-            <label for="ekskul">Extracurriculars</label>
-            <select name="extracurricular_id" id="ekskul" class="form-control" required>
-                <option>Select One</option>
+            <div class="row row-cols-3">
                 @foreach ($ekskul as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
+                <div class="form-check col">
+                    <input class="form-check-input" type="checkbox" value="{{$item->id}}" id="ekskulCheckBox"
+                        name="extracurricular_id[]"
+                        {{ ( $student->extracurriculars->contains($item->id) ) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="ekskulCheckBox">
+                        {{$item->name}}
+                    </label>
+                </div>
                 @endforeach
-            </select>
-        </div>
-        <div class="mb-3">
-            <button class="btn btn-success" type="submit">Save</button>
-        </div>
-    </form>
+            </div>
+            <div class="my-3">
+                <button class="btn btn-success" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 @endsection
