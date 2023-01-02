@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentCreateRequest;
 use App\Models\ClassRoom;
 use App\Models\Extracurricular;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -28,7 +30,7 @@ class StudentController extends Controller
         return view('student-add', ['class' => $class,]);
     }
 
-    public function store(Request $request)
+    public function store(StudentCreateRequest $request)
     {
         // dd($request->all());
         // $student = new Student();
@@ -38,8 +40,21 @@ class StudentController extends Controller
         // $student->class_id = $request->class_id;
         // $student->save();
 
+        // $validated = $request->validate([
+        //     'nis' => 'required|unique:students|min:9|max:10',
+        //     'name' => 'required|max:50',
+        //     'gender' => 'required',
+        //     'class_id' => 'required',
+        // ]);
+
         // mass assignment
         $student = Student::create($request->all());
+
+        if ($student) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Add new student success!');
+        }
+
         return redirect('/students');
     }
 
@@ -47,6 +62,7 @@ class StudentController extends Controller
     {
         $student = Student::find($request->student_id);
         $student->extracurriculars()->attach($request->extracurricular_id);
+
         return redirect('/students');
     }
 
@@ -57,7 +73,7 @@ class StudentController extends Controller
         return view('student-edit', ['student' => $student, 'class' => $class,]);
     }
 
-    public function update(Request $request, $id)
+    public function update(StudentCreateRequest $request, $id)
     {
         $student = Student::findOrFail($id);
         // $student->name = $request->name;
@@ -66,6 +82,13 @@ class StudentController extends Controller
         // $student->class_id = $request->class_id;
         // $student->save();
         $student->update($request->all());
+
+        if ($student) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Edit student success!');
+        }
+
+        return redirect('/students');
     }
 
     public function editEkskul(Request $request)
@@ -74,6 +97,12 @@ class StudentController extends Controller
         // dd($ekskulList[0]);
         $student = Student::find($request->student_id);
         $student->extracurriculars()->sync($ekskulList);
+
+        if ($student) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Edit ekskul success!');
+        }
+
         return redirect()->back();
     }
 }

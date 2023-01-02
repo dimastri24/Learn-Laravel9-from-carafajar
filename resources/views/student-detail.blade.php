@@ -37,6 +37,12 @@
         </td>
     </tr>
 </table>
+
+@if (Session::has('status'))
+<div class="alert alert-success" role="alert">
+    {{Session::get('message')}}
+</div>
+@endif
 {{-- {{$ekskul}} --}}
 {{-- <a href="ekskul-add/{{$student->id}}" class="btn btn-success">Add Extracurricular</a> --}}
 <div class="row my-5 justify-content-between">
@@ -65,7 +71,7 @@
         <form action="/ekskul-edit" method="POST">
             @csrf
             <input type="hidden" name="student_id" value="{{$student->id}}">
-            <div class="row row-cols-3">
+            <div class="row row-cols-3 ms-1">
                 @foreach ($ekskul as $item)
                 <div class="form-check col">
                     <input class="form-check-input" type="checkbox" value="{{$item->id}}" id="ekskulCheckBox"

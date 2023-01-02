@@ -118,5 +118,9 @@ select * from student where class in (1A, 1B, 1C, 1D)
 ### CRUD
 
 -   Basic CRUD di laravel dgn eloquent. Mulai dari insert, update, delete, soft delete, flash message dan validation.
--   Pertama insert data student, disini tambahan aku nyoba sendiri add ekskul student nya krn dia many to many.
--   Kedua kita update data student, aku juga nyoba update ekskul student nya menggunakan `sync()`.
+-   Pertama insert data student, disini tambahan aku nyoba sendiri add ekskul student nya krn dia many to many menggunakan `attach()`. Konsep basic nya sama aja
+-   Kedua kita update data student, aku juga nyoba update ekskul student nya menggunakan `sync()`. Yg update juga basic nya sama aja
+-   insert dan update ada yg mass assignment. Untuk menggunakannya ada syaratnya, name atribute input nya harus sama dgn nama column di table, terus kita juga harus ngasih tau column mana aja yg boleh diisi atau update dgn fillable di Model nya.
+-   Ketiga kita coba implement session flash data nya. Biar bisa nampilin flash message kalo abis melakukan create dan update. Syntax nya ada dua, di dokumen begini `$request->session()->flash()` tapi ada juga yg gini `Session::flash()` seperti yg kita pake.
+-   Keempat kita buat form validation, diliat" ini tuh backend validation. Kita bisa validate di controller langsung atau bikin file validasi teripsah caranya `php artisan make:request StorePostRequest` biar lebih detail kustomisasi nya. Munculin message nya kita pake flash message juga, cuma contoh kali ini simple aja pake yg bawaan jadi gk kita tulis di controller cuma tinggal panggil message nya di blade.
+-

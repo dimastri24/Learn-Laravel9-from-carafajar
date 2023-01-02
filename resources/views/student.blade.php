@@ -8,6 +8,12 @@
     <a href="student-add" class="btn btn-primary">Add Data</a>
 </div>
 
+@if (Session::has('status'))
+<div class="alert alert-success" role="alert">
+    {{Session::get('message')}}
+</div>
+@endif
+
 <h3>Student List</h3>
 
 <table class="table mb-5">
