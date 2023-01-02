@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StudentCreateRequest;
-use App\Models\ClassRoom;
-use App\Models\Extracurricular;
 use App\Models\Student;
+use App\Models\ClassRoom;
 use Illuminate\Http\Request;
+use App\Models\Extracurricular;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StudentCreateRequest;
 
 class StudentController extends Controller
 {
@@ -104,5 +105,72 @@ class StudentController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function delete(Request $request, $id)
+    {
+        // dd($request->all());
+        $student = null;
+        if ($request->action == 'soft') {
+            // dd('soft delete');
+            $student = Student::findOrFail($id);
+        } elseif ($request->action == 'force') {
+            // dd('force delete');
+            $studentTemp = Student::withTrashed()->where('id', $id)->get();
+            $student = $studentTemp[0];
+        }
+
+        // dd($student);
+        if ($student == null) {
+            return abort(404);
+        } else {
+            return view('student-delete', ['student' => $student, 'action' => $request->action,]);
+        }
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        // $deletedStudent = DB::table('students')->where('id', $id)->delete();
+        $deletedStudent = null;
+        // dd($request->all());
+
+        switch ($request->input('submit')) {
+            case 'soft':
+                $deletedStudent = Student::findOrFail($id)->delete();
+                // $deletedStudent->delete();
+                // dd('soft delete');
+                break;
+            case 'force':
+                $deletedStudent = Student::withTrashed()->where('id', $id)->forceDelete();
+                // $deletedStudent[0]->forceDelete();
+                // dd('force delete');
+                break;
+        }
+
+        if ($deletedStudent) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Delete student success!');
+        } else {
+            return abort(404);
+        }
+
+        return redirect('/students');
+    }
+
+    public function deletedStudent()
+    {
+        $deletedStudent = Student::onlyTrashed()->get();
+        return view('student-deleted-list', ['studentList' => $deletedStudent,]);
+    }
+
+    public function restore($id)
+    {
+        $deletedStudent = Student::withTrashed()->where('id', $id)->restore();
+
+        if ($deletedStudent) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Restore student success!');
+        }
+        return redirect('/student-deleted');
     }
 }

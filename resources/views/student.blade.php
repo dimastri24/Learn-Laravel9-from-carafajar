@@ -4,8 +4,9 @@
 @section('content')
 <h1>Ini Halaman Student</h1>
 
-<div class="my-4">
+<div class="my-4 d-flex justify-content-between">
     <a href="student-add" class="btn btn-primary">Add Data</a>
+    <a href="student-deleted" class="btn btn-info">Show Deleted Data</a>
 </div>
 
 @if (Session::has('status'))
@@ -33,7 +34,15 @@
             <td>{{$data->name}}</td>
             <td>{{$data->nis}}</td>
             <td>{{$data->gender}}</td>
-            <td><a href="student/{{$data->id}}">detail</a> | <a href="student-edit/{{$data->id}}">edit</a></td>
+            <td><a href="student/{{$data->id}}" class="btn btn-link p-0">detail</a> | <a
+                    href="student-edit/{{$data->id}}" class="btn btn-link p-0">edit</a> |
+                {{-- <a href="student-delete/{{$data->id}}">delete</a> --}}
+                <form action="student-delete/{{$data->id}}" class="d-inline-block" method="POST">
+                    @csrf
+                    <input type="hidden" name="action" value="soft">
+                    <button type="submit" class="btn btn-link p-0">delete</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>

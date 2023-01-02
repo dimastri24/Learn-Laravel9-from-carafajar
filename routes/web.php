@@ -32,6 +32,11 @@ Route::post('/student', [StudentController::class, 'store']);
 Route::get('/student-edit/{id}', [StudentController::class, 'edit']);
 Route::put('/student/{id}', [StudentController::class, 'update']);
 
+Route::post('/student-delete/{id}', [StudentController::class, 'delete']);
+Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy']);
+Route::get('/student-deleted', [StudentController::class, 'deletedStudent']);
+Route::get('/student/{id}/restore', [StudentController::class, 'restore']);
+
 Route::post('/ekskul-add', [StudentController::class, 'addEkskul']);
 Route::post('/ekskul-edit', [StudentController::class, 'editEkskul']);
 
