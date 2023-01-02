@@ -114,3 +114,9 @@ select * from student where class in (1A, 1B, 1C, 1D)
 
 -   Branch ini gk byk teori atau feature dari laravel. Disini kita cuma bikin detail page sama bebenahin page lain.
 -   karena kita bikin detail page, jadi kita update bikin mvc baru utk detail page nya.
+
+### CRUD
+
+-   Basic CRUD di laravel dgn eloquent. Mulai dari insert, update, delete, soft delete, flash message dan validation.
+-   Pertama insert data student, disini tambahan aku nyoba sendiri add ekskul student nya krn dia many to many.
+-

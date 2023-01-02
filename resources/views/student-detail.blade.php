@@ -37,5 +37,26 @@
         </td>
     </tr>
 </table>
+{{$ekskul}}
+{{-- <a href="ekskul-add/{{$student->id}}" class="btn btn-success">Add Extracurricular</a> --}}
+<div class="my-5 col-6 bg-light p-5 rounded">
+    <p class="h3">Add New Extracurriculars</p>
+    <form action="/ekskul-add" method="POST">
+        @csrf
+        <div class="mb-3">
+            <input type="hidden" name="student_id" value="{{$student->id}}">
+            <label for="ekskul">Extracurriculars</label>
+            <select name="extracurricular_id" id="ekskul" class="form-control" required>
+                <option>Select One</option>
+                @foreach ($ekskul as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-success" type="submit">Save</button>
+        </div>
+    </form>
+</div>
 
 @endsection

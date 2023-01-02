@@ -3,6 +3,9 @@
 
 @section('content')
 <h1>Ini Halaman Students</h1>
+<div class="my-4">
+    <a href="#" class="btn btn-primary">Add Data</a>
+</div>
 <h3>Class List</h3>
 <table class="table">
     <thead>
