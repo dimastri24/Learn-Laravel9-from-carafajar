@@ -15,7 +15,20 @@
 </div>
 @endif
 
-<h3>Student List</h3>
+<div class="my-3 d-lg-flex justify-content-between">
+    <div class="col mb-3 mb-lg-0">
+        <h3 class="m-0">Student List</h3>
+    </div>
+    <div class="col-12 col-lg-5">
+        <form action="" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="keyword" placeholder="Keyword..." aria-label="Keyword..."
+                    aria-describedby="search-button" autocomplete="off">
+                <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <table class="table mb-5">
     <thead>
@@ -24,16 +37,18 @@
             <th>Name</th>
             <th>NIS</th>
             <th>Gender</th>
+            <th>Class</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($studentList as $data)
         <tr>
-            <td>{{$loop->iteration}}</td>
+            <td>{{$loop->iteration + $studentList->firstItem() - 1}}</td>
             <td>{{$data->name}}</td>
             <td>{{$data->nis}}</td>
             <td>{{$data->gender}}</td>
+            <td>{{$data->class->name}}</td>
             <td><a href="student/{{$data->id}}" class="btn btn-link p-0">detail</a> | <a
                     href="student-edit/{{$data->id}}" class="btn btn-link p-0">edit</a> |
                 {{-- <a href="student-delete/{{$data->id}}">delete</a> --}}
@@ -47,5 +62,9 @@
         @endforeach
     </tbody>
 </table>
+
+<div class="my-5">
+    {{$studentList->withQueryString()->links()}}
+</div>
 
 @endsection
