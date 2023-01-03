@@ -9,6 +9,7 @@ use App\Models\Extracurricular;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StudentCreateRequest;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -23,6 +24,8 @@ class StudentController extends Controller
                 $query->where('name', 'LIKE', '%' . $keyword . '%');
             })
             ->paginate(15);
+        // $student = Student::orderBy('updated_at', 'desc')->get();
+
         return view('student', ['studentList' => $student,]);
     }
 
@@ -41,22 +44,17 @@ class StudentController extends Controller
 
     public function store(StudentCreateRequest $request)
     {
-        // dd($request->all());
-        // $student = new Student();
-        // $student->name = $request->name;
-        // $student->gender = $request->gender;
-        // $student->nis = $request->nis;
-        // $student->class_id = $request->class_id;
-        // $student->save();
+        // dd($request->photo);
+        $newName = '';
 
-        // $validated = $request->validate([
-        //     'nis' => 'required|unique:students|min:9|max:10',
-        //     'name' => 'required|max:50',
-        //     'gender' => 'required',
-        //     'class_id' => 'required',
-        // ]);
+        if ($request->file('photo')) {
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $strName = preg_replace('/\s+/', '', $request->name);
+            $newName = strtolower($strName) . '-' . now()->timestamp . '.' . $extension;
+            $request->file('photo')->storeAs('photo', $newName);
+        }
 
-        // mass assignment
+        $request['image'] = $newName;
         $student = Student::create($request->all());
 
         if ($student) {
@@ -82,14 +80,38 @@ class StudentController extends Controller
         return view('student-edit', ['student' => $student, 'class' => $class,]);
     }
 
-    public function update(StudentCreateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
-        // $student->name = $request->name;
-        // $student->gender = $request->gender;
-        // $student->nis = $request->nis;
-        // $student->class_id = $request->class_id;
-        // $student->save();
+        $oldPhoto = $student->image;
+        // $file_path = 'storage/photo/' . $oldPhoto; // path jika pakai unlink()
+        $file_path = 'photo/' . $oldPhoto; // path jika pakai Storage::Delete
+
+        $newName = '';
+
+        if ($request->file('photo')) {
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $strName = preg_replace('/\s+/', '', $request->name);
+            $newName = strtolower($strName) . '-' . now()->timestamp . '.' . $extension;
+            $request->file('photo')->storeAs('photo', $newName);
+            $request['image'] = $newName;
+
+            if (isset($oldPhoto) || $oldPhoto != '') {
+                // unlink / delete old photo
+                // unlink($file_path);
+                if (Storage::exists($file_path)) {
+                    Storage::delete($file_path);
+                } else {
+                    dd('file gk ada!');
+                }
+            }
+        } else {
+            // timpa dgn nama yg sama, artinya biar gk berubah
+            $request['image'] = $oldPhoto;
+        }
+
+        // dd($request->all());
+
         $student->update($request->all());
 
         if ($student) {

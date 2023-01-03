@@ -14,7 +14,7 @@
     </div>
     @endif
 
-    <form action="/student/{{$student->id}}" method="POST">
+    <form action="/student/{{$student->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -45,6 +45,12 @@
                     {{$item->name}}</option>
                 @endforeach
             </select>
+        </div>
+        <div class="mb-3">
+            <label for="photo">Photo</label>
+            <div class="input-group">
+                <input type="file" class="form-control" id="photo" name="photo" aria-label="Upload">
+            </div>
         </div>
         <div class="mb-3">
             <button class="btn btn-success" type="submit">Update</button>
