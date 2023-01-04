@@ -20,7 +20,7 @@ use App\Http\Controllers\ExtracurricularController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate'])->middleware('guest');
@@ -28,16 +28,22 @@ Route::post('/login', [AuthController::class, 'authenticate'])->middleware('gues
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::get('/students', [StudentController::class, 'index'])->middleware('auth');
-Route::get('/student/{id}', [StudentController::class, 'show'])->middleware('auth');
-Route::get('/student-add', [StudentController::class, 'create'])->middleware('auth');
-Route::post('/student', [StudentController::class, 'store'])->middleware('auth');
-Route::get('/student-edit/{id}', [StudentController::class, 'edit'])->middleware('auth');
-Route::put('/student/{id}', [StudentController::class, 'update'])->middleware('auth');
 
-Route::post('/student-delete/{id}', [StudentController::class, 'delete'])->middleware('auth');
-Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy'])->middleware('auth');
-Route::get('/student-deleted', [StudentController::class, 'deletedStudent'])->middleware('auth');
-Route::get('/student/{id}/restore', [StudentController::class, 'restore'])->middleware('auth');
+Route::middleware(['auth', 'must-admin-or-teacher'])->group(function () {
+    Route::get('/student/{id}', [StudentController::class, 'show']);
+    Route::get('/student-add', [StudentController::class, 'create']);
+    Route::post('/student', [StudentController::class, 'store']);
+    Route::get('/student-edit/{id}', [StudentController::class, 'edit']);
+    Route::put('/student/{id}', [StudentController::class, 'update']);
+});
+
+// Route::post('/student-delete/{id}', [StudentController::class, 'delete'])->middleware(['auth', 'must-admin']);
+Route::middleware(['auth', 'must-admin'])->group(function () {
+    Route::post('/student-delete/{id}', [StudentController::class, 'delete']);
+    Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy']);
+    Route::get('/student-deleted', [StudentController::class, 'deletedStudent']);
+    Route::get('/student/{id}/restore', [StudentController::class, 'restore']);
+});
 
 Route::post('/ekskul-add', [StudentController::class, 'addEkskul'])->middleware('auth');
 Route::post('/ekskul-edit', [StudentController::class, 'editEkskul'])->middleware('auth');

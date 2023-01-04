@@ -1,6 +1,6 @@
 # Belajar Laravel 9 Dasar (Beginner)
 
-Dari playlist 'Tutorial LARAVEL 9 Dasar Untuk Pemula' oleh 'cara fajar'
+Dari playlist _Tutorial LARAVEL 9 Dasar Untuk Pemula_ oleh _cara fajar_
 
 [Documentation Laravel 9](https://laravel.com/docs/9.x)
 
@@ -106,6 +106,7 @@ select * from student where class in (1A, 1B, 1C, 1D)
 -   Disini gk byk penjelasan krn cukup jelas hanya cara penerapan relationship di laravel ini
 -   Cara nerapin relationship disini itu emang beda, jadi kita nge define relation nya belakangan. Tapi cara gini jadi lebih mudah dipahami karena pendekatan ke database nya. Kita bikin foreign nya manual di dalem migration terus baru kita define bahwa ini punya relation di model nya.
 -   Define Many to many dgn `belongsToMany()` di dalem model nya.
+    <br><br>
 -   Nested relationship, intinya tuh bikin relation gk langsung. Disini contohnya students manggil teachers tapi lewat class krn mereka gk ada relation langsung sedangkan class dan teacher punya.
 -   Cara manggil nya di controller kita panggil function dari model yg mau di join. Di StudentController, `with()`kan isinya manggil relation, nah disitu kita panggil `class.homeroomTeacher` yg awalnya cuma `class` (table) jadi ada `homeroomTeacher` function di dalem model Class. Saat kita mau tampilin juga sama yg dipanggil function nya.
 -   Kalo dilihat return array nya dia berupa object, jadi sama aja kyk yg biasa kita tahu.
@@ -119,14 +120,19 @@ select * from student where class in (1A, 1B, 1C, 1D)
 
 -   Basic CRUD di laravel dgn eloquent. Mulai dari insert, update, delete, soft delete, flash message dan validation.
 -   Pertama insert data student, disini tambahan aku nyoba sendiri add ekskul student nya krn dia many to many menggunakan `attach()`. Konsep basic nya sama aja
+    <br><br>
 -   Kedua kita update data student, aku juga nyoba update ekskul student nya menggunakan `sync()`. Yg update juga basic nya sama aja
 -   insert dan update ada yg mass assignment. Untuk menggunakannya ada syaratnya, name atribute input nya harus sama dgn nama column di table, terus kita juga harus ngasih tau column mana aja yg boleh diisi atau update dgn fillable di Model nya.
+    <br><br>
 -   Ketiga kita coba implement session flash data nya. Biar bisa nampilin flash message kalo abis melakukan create dan update. Syntax nya ada dua, di dokumen begini `$request->session()->flash()` tapi ada juga yg gini `Session::flash()` seperti yg kita pake.
 -   Keempat kita buat form validation, diliat" ini tuh backend validation. Kita bisa validate di controller langsung atau bikin file validasi teripsah caranya `php artisan make:request StorePostRequest` biar lebih detail kustomisasi nya. Munculin message nya kita pake flash message juga, cuma contoh kali ini simple aja pake yg bawaan jadi gk kita tulis di controller cuma tinggal panggil message nya di blade.
+    <br><br>
 -   Kelima kita delete student, delete ya simple tinggal panggil function `delete()` nya aja. Disini kita ceritanya mau pake konfirmasi gitu tapi krn kita full php, biar gampang kita bikin halaman baru aja.
 -   Tambahan aku juga update table pivot student_extracurricular nya untuk column student_id nya jadi onDelete('cascade') agar kalau kita delete student, ekskul student itu juga ikut kehapus
+    <br><br>
 -   Terakhir kita nerapin soft delete pada students. Hal pertama yang kita lakukan adalah use SoftDeletes di model Student nya. Terus kita migrate table nya bikin column softDeletes, kalau di table hasilnya column deleted_at. Dengan begini kalau kita delete student, di table masih ada student nya dan deleted_at nya keisi timestamp, pada view bisa kita query mau dimunculin atau gk dgn method yg berbau trashed().
 -   Cara restore nya gampang, kita cuma butuh id data nya, terus kita query trash ditambah where bkn find biasa abis itu kita `restore()`.
+    <br><br>
 -   Lalu bagaimana kalau kita beneran mau hapus data nya? Caranya dgn manggil function `forceDelete()` daripada `delete()` biasa. Disini aku dah byk modifikasi kodingan nya dari tutorial nya agar bisa menyusaikan saat mau soft delete dan force delete, sepeti merubah method routing ama controllernya, bentuk link nya jadi form yg nge post hidden data sampe ada multiple button submit.
 -   Aku gk nyoba nerapin delete pivot table many to many student ekskul nya dgn method `detach()` karena dgn pakai sync() aja dah cukup untuk handle semua crud nya. Bahkan yg add bisa aku hapus aja krn useless tapi aku biarin dikomen aja.
 -   Sampai sini aku gk bikin crud untuk yg lain krn sama aja, jadi aku spend more time pada hal yg beda ato gk dijelasin di playlist seperti handling many to many dan force delete.
@@ -157,3 +163,16 @@ select * from student where class in (1A, 1B, 1C, 1D)
 -   Selanjutnya bikin controller authenticate() nya disana bakal ngerjain semuanya ama laravel sendiri di balik layar, kita cuma tinggal function `Auth::attempt()`sama bikin `session()` nya beres. Ini berlaku selama kita pakai table users yg dah dibikinin ya.
 -   Cek jika beneran bisa login apa gk. Akses langsung ke halaman bakal mental ke login, isi asal"an bakal di reject. Masuk pake user admin baru di acc dan bisa landing ke dalem. Print user sapa yg lagi login bisa.
 -   Sekarang bikin logout. Simple aja bikin link logout, route logout, sama controller logout nya. Di dalem method nya tinggal panggil `Auth::logout` sama invalidate session selesai.
+    <br><br>
+-   Waktunya buat fitur batas akses user sesuai role masing". Hal utama yg kita butuhkan adalah bikin Middleware `php artisan make:middleware MustAdmin`. Pada titik ini kita gk bikin full crud utk yg lain tapi cuma student doang, maka dari itu middleware yg kita bikin hanya dua, MustAdmin dan MustAdminOrTeacher krn mereka yg punya akses ke student. Abis bikin middleware, jgn lupa di register ke Kernel agar bisa dipakai.
+-   Logic rule nya akan di dalem middleware yg kita bikin, bisa apa aja sesuai yg kita mau. Disini simple aja kita mau filter user yg bisa akses dgn role tertentu yg gk bakal kita abort aja.
+-   Terakhir tinggal kita hide tampilan yg gk dibutuhin oleh user nya.
+
+## Note
+
+-   Yeay playlist belajar laravel 9 dasar selesai 👏👏👏
+-   Gk nyangka bikin note pembelajaran sebanyak ini. Dipikir pikir knp waktu itu pas belajar React gk dibikin gini aja ketimbang naro catatan didalem coding nya langsung. Waktu itu blm bljr Git sih ya wajar tapi ywdhlah terlanjur hehe.
+-   Users :
+    -   admin | admin@email.com | rahasia
+    -   teacher | teacher@email.com | rahasia
+    -   student | student@email.com | rahasia

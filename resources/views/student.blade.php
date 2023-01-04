@@ -49,14 +49,20 @@
             <td>{{$data->nis}}</td>
             <td>{{$data->gender}}</td>
             <td>{{$data->class->name}}</td>
-            <td><a href="student/{{$data->id}}" class="btn btn-link p-0">detail</a> | <a
-                    href="student-edit/{{$data->id}}" class="btn btn-link p-0">edit</a> |
-                {{-- <a href="student-delete/{{$data->id}}">delete</a> --}}
+            <td>
+                @if (Auth::user()->role_id != 1 && Auth::user()->role_id != 2)
+                -
+                @else
+                <a href="student/{{$data->id}}" class="btn btn-link p-0">detail</a> |
+                <a href="student-edit/{{$data->id}}" class="btn btn-link p-0">edit</a>
+                @endif
+                @if (Auth::user()->role_id == 1)
                 <form action="student-delete/{{$data->id}}" class="d-inline-block" method="POST">
                     @csrf
                     <input type="hidden" name="action" value="soft">
-                    <button type="submit" class="btn btn-link p-0">delete</button>
+                    | <button type="submit" class="btn btn-link p-0">delete</button>
                 </form>
+                @endif
             </td>
         </tr>
         @endforeach
