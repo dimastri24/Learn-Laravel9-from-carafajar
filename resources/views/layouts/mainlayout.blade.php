@@ -19,7 +19,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item px-3">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
@@ -34,6 +34,11 @@
                     </li>
                     <li class="nav-item px-3">
                         <a class="nav-link" href="/teacher">Teacher</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
