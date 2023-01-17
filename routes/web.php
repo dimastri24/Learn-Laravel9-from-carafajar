@@ -30,19 +30,19 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/students', [StudentController::class, 'index'])->middleware('auth');
 
 Route::middleware(['auth', 'must-admin-or-teacher'])->group(function () {
-    Route::get('/student/{id}', [StudentController::class, 'show']);
+    Route::get('/student/{slug}', [StudentController::class, 'show']);
     Route::get('/student-add', [StudentController::class, 'create']);
     Route::post('/student', [StudentController::class, 'store']);
-    Route::get('/student-edit/{id}', [StudentController::class, 'edit']);
+    Route::get('/student-edit/{slug}', [StudentController::class, 'edit']);
     Route::put('/student/{id}', [StudentController::class, 'update']);
 });
 
 // Route::post('/student-delete/{id}', [StudentController::class, 'delete'])->middleware(['auth', 'must-admin']);
 Route::middleware(['auth', 'must-admin'])->group(function () {
-    Route::post('/student-delete/{id}', [StudentController::class, 'delete']);
+    Route::post('/student-delete/{slug}', [StudentController::class, 'delete']);
     Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy']);
     Route::get('/student-deleted', [StudentController::class, 'deletedStudent']);
-    Route::get('/student/{id}/restore', [StudentController::class, 'restore']);
+    Route::get('/student/{slug}/restore', [StudentController::class, 'restore']);
 });
 
 Route::post('/ekskul-add', [StudentController::class, 'addEkskul'])->middleware('auth');
@@ -56,3 +56,5 @@ Route::get('/extracurricular/{id}', [ExtracurricularController::class, 'show'])-
 
 Route::get('/teacher', [TeacherController::class, 'index'])->middleware('auth');
 Route::get('/teacher/{id}', [TeacherController::class, 'show'])->middleware('auth');
+
+// Route::get('/student-mass-update', [StudentController::class, 'massUpdate']);

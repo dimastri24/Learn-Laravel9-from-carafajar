@@ -199,3 +199,12 @@ Maka Dari itu, aku gk bakal bikin branch setiap video melainkan hanya commit bia
 -   Basic nya kyk pake React, bikin component kecil yg reusable utk dipanggil di halaman lain. Bisa passing attributes yg isinya dynamic data itu sendiri.
 -   Passing data nya lewat class yg dibikinin tadi. Define atau initialize variable utk nampung data yg di passing terus panggil di constructor nya.
 -   Ngoper data di component dan tempat manggilin nya tinggal liat di code nya atau di dokument.
+-   lupa nambahin, disini cuma implement dikin aja component alert nya utk yg success kalo add, edit, delete student
+
+### Slug & Pretty URl
+
+-   Slug ini digunakan utk merubah sebuah string biasanya digunakan utk merubah url.
+-   Biar enak kita bikin column baru slug di table students, terus kita mau mass update biar gk null. codinganya ku tinggalin commented disana.
+-   Data slug yg kita simpen ngambil dari nama terus seperator nya pake underscore `Str::slug($request->name, '_');`
+-   Gunainnya tinggal yang awalnya pake id ganti pake slug di url dan controller nya
+-   Disini aku coba implement di student detail, view edit, view delete, restore students

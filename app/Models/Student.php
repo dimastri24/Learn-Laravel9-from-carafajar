@@ -16,7 +16,7 @@ class Student extends Model
 
     // sblm bisa pake insert update dgn eloquent butuh declare fillable dulu disini
     protected $fillable = [
-        'name', 'gender', 'nis', 'class_id', 'image'
+        'name', 'gender', 'nis', 'class_id', 'image', 'slug'
     ];
 
 

@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\ClassRoom;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Extracurricular;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\StudentCreateRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StudentCreateRequest;
 
 class StudentController extends Controller
 {
@@ -29,9 +30,10 @@ class StudentController extends Controller
         return view('student', ['studentList' => $student,]);
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $student = Student::with(['class.homeroomTeacher', 'extracurriculars'])->findOrFail($id);
+        // $student = Student::with(['class.homeroomTeacher', 'extracurriculars'])->findOrFail($id);
+        $student = Student::with(['class.homeroomTeacher', 'extracurriculars'])->where('slug', $slug)->first();
         $ekskul = Extracurricular::get(['id', 'name']);
         return view('student-detail', ['student' => $student, 'ekskul' => $ekskul,]);
     }
@@ -55,6 +57,7 @@ class StudentController extends Controller
         }
 
         $request['image'] = $newName;
+        $request['slug'] = Str::slug($request->name, '_');
         $student = Student::create($request->all());
 
         if ($student) {
@@ -73,9 +76,10 @@ class StudentController extends Controller
         return redirect('/students');
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $student = Student::with('class')->findOrFail($id);
+        $student = Student::with('class')->where('slug', $slug)->first();
+        // $student = Student::with('class')->findOrFail($id);
         $class = ClassRoom::get(['id', 'name']);
         return view('student-edit', ['student' => $student, 'class' => $class,]);
     }
@@ -137,16 +141,17 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request, $slug)
     {
         // dd($request->all());
         $student = null;
         if ($request->action == 'soft') {
             // dd('soft delete');
-            $student = Student::findOrFail($id);
+            // $student = Student::findOrFail($id);
+            $student = Student::where('slug', $slug)->first();
         } elseif ($request->action == 'force') {
             // dd('force delete');
-            $studentTemp = Student::withTrashed()->where('id', $id)->get();
+            $studentTemp = Student::withTrashed()->where('slug', $slug)->get();
             $student = $studentTemp[0];
         }
 
@@ -193,9 +198,10 @@ class StudentController extends Controller
         return view('student-deleted-list', ['studentList' => $deletedStudent,]);
     }
 
-    public function restore($id)
+    public function restore($slug)
     {
-        $deletedStudent = Student::withTrashed()->where('id', $id)->restore();
+        // $deletedStudent = Student::withTrashed()->where('id', $id)->restore();
+        $deletedStudent = Student::withTrashed()->where('slug', $slug)->restore();
 
         if ($deletedStudent) {
             Session::flash('status', 'success');
@@ -203,4 +209,13 @@ class StudentController extends Controller
         }
         return redirect('/student-deleted');
     }
+
+    // public function massUpdate()
+    // {
+    //     $student = Student::whereNull('slug')->get();
+    //     collect($student)->map(function ($item) {
+    //         $item->slug = Str::slug($item->name, '_');
+    //         $item->save();
+    //     });
+    // }
 }

@@ -29,9 +29,9 @@
                 <td>{{$data->name}}</td>
                 <td>{{$data->nis}}</td>
                 <td>{{$data->gender}}</td>
-                <td><a href="/student/{{$data->id}}/restore" class="btn btn-link p-0">restore</a> |
+                <td><a href="/student/{{$data->slug}}/restore" class="btn btn-link p-0">restore</a> |
                     {{-- <a href="student-delete/{{$data->id}}">delete</a> --}}
-                    <form action="student-delete/{{$data->id}}" class="d-inline-block" method="POST">
+                    <form action="student-delete/{{$data->slug}}" class="d-inline-block" method="POST">
                         @csrf
                         <input type="hidden" name="action" value="force">
                         <button type="submit" class="btn btn-link p-0">delete</button>
