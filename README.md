@@ -208,3 +208,12 @@ Maka Dari itu, aku gk bakal bikin branch setiap video melainkan hanya commit bia
 -   Data slug yg kita simpen ngambil dari nama terus seperator nya pake underscore `Str::slug($request->name, '_');`
 -   Gunainnya tinggal yang awalnya pake id ganti pake slug di url dan controller nya
 -   Disini aku coba implement di student detail, view edit, view delete, restore students
+
+### Slug with Eloquent Sluggable
+
+-   Ini git repo nya [Eloquent Sluggable](https://github.com/cviebrock/eloquent-sluggable)
+-   Install `composer require cviebrock/eloquent-sluggable`
+-   Sebelumnya kita bikin slug manual dan ada kelemahan nya yaitu ketika nama nya ada yg sama, nah dengan pake sluggable ini bantu solving masalah tersebut.
+-   Basic nya sama seperti yg kita buat, bisa liat di dokumentasi utk contohnya. Default seperator nya '-', bisa kita ganti juga ke yg lain kalo mau, tapi disini kita pake apa adanya aja. Agak aneh sih krn seblmnya kita pake '\_' tapi skrg jadi '-', tapi ywdhlah.
+-   Solusi yg ditawarkan sluggable ini itu degan mengetahui slug yg sama lalu di increament slugnya, sehingga slug nya jadi beda. Contoh disini aku insert dua kali dgn nama yg sama 'cara fajar', slug yg tersimpan adalah 'cara-fajar' dan 'cara-fajar-2'
+-   Sluggable ini otomatis isi slug kita selama sudah kita panggil di model. Jangan lupa juga utk dihapus slug manual yg sblmnya

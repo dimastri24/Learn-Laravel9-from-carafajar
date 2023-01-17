@@ -57,7 +57,7 @@ class StudentController extends Controller
         }
 
         $request['image'] = $newName;
-        $request['slug'] = Str::slug($request->name, '_');
+        // $request['slug'] = Str::slug($request->name, '_');
         $student = Student::create($request->all());
 
         if ($student) {
