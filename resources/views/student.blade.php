@@ -10,9 +10,10 @@
 </div>
 
 @if (Session::has('status'))
-<div class="alert alert-success" role="alert">
+{{-- <div class="alert alert-success" role="alert">
     {{Session::get('message')}}
-</div>
+</div> --}}
+<x-alert message="{{Session::get('message')}}" type='success'></x-alert>
 @endif
 
 <div class="my-3 d-lg-flex justify-content-between">
@@ -73,4 +74,5 @@
     {{$studentList->withQueryString()->links()}}
 </div>
 
+{{-- <x-alert message="Ini adalah halaman student" type='warning'></x-alert> --}}
 @endsection

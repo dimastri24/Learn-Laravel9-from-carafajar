@@ -176,3 +176,26 @@ select * from student where class in (1A, 1B, 1C, 1D)
     -   admin | admin@email.com | rahasia
     -   teacher | teacher@email.com | rahasia
     -   student | student@email.com | rahasia
+-   Disini emang gk akan di terapin kesemua seperti yg kubilang sebelumnya, tapi setidaknya paham akan cara penggunaanya. Kalo lebih explore lagi bisa nyoba sendiri di project berbeda atau bisa aja aku kerjain disini juga 'mungkin'.
+
+<br/>
+
+# Trips, Trick & Fitur Laravel
+
+Lanjutan ke playlist yg _Tips, Trick & Fitur Laravel_. Repo ini akan tetap dipakai untuk sebagian dari tutorialnya, karena kalo diliat, ada yang bakal diterapin ke palylist API atau bikin project baru.
+Maka Dari itu, aku gk bakal bikin branch setiap video melainkan hanya commit biasa aja, jadi kalo butuh sesuatu langsung checkout pake id commit nya.
+
+## Commit content
+
+### Branch Master
+
+-   Master akan selalu jadi hasil commit paling baru
+
+### Blade Component
+
+-   Documentasi nya ada di The Basics -> Blade Templates -> Components
+-   Sebelumnya kita bikin template layout, skrg kita bikin template component utk component yg lebih kecil
+-   Pertama harus bikin component nya dulu pake artiasn `php artisan make:component Alert` , nanti dibikinin dua file, view sama class.
+-   Basic nya kyk pake React, bikin component kecil yg reusable utk dipanggil di halaman lain. Bisa passing attributes yg isinya dynamic data itu sendiri.
+-   Passing data nya lewat class yg dibikinin tadi. Define atau initialize variable utk nampung data yg di passing terus panggil di constructor nya.
+-   Ngoper data di component dan tempat manggilin nya tinggal liat di code nya atau di dokument.

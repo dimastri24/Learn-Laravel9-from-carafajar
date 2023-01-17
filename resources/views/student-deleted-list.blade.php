@@ -4,9 +4,10 @@
 @section('content')
 <h1 class="mb-3">Ini Halaman Student yang sudah di Delete</h1>
 @if (Session::has('status'))
-<div class="alert alert-success" role="alert">
+{{-- <div class="alert alert-success" role="alert">
     {{Session::get('message')}}
-</div>
+</div> --}}
+<x-alert message="{{Session::get('message')}}" type='success'></x-alert>
 @endif
 <a href="/students" class="btn btn-primary">Go Back</a>
 
