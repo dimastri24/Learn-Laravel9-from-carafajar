@@ -21,19 +21,36 @@ class ClassSeeder extends Seeder
         ClassRoom::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $data = [
-            ['name' => "1A",],
-            ['name' => "1B",],
-            ['name' => "1C",],
-            ['name' => "1D",],
-        ];
+        // $data = [
+        //     ['name' => "1A",],
+        //     ['name' => "1B",],
+        //     ['name' => "1C",],
+        //     ['name' => "1D",],
+        // ];
 
-        foreach ($data as $val) {
-            ClassRoom::insert([
-                'name' => $val['name'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }
+        // foreach ($data as $val) {
+        //     ClassRoom::insert([
+        //         'name' => $val['name'],
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //     ]);
+        // }
+
+        $class1 = ClassRoom::create([
+            'name' => '1A',
+            'teacher_id' => 1,
+        ]);
+        $class2 = ClassRoom::create([
+            'name' => '2A',
+            'teacher_id' => 2,
+        ]);
+        $class3 = ClassRoom::create([
+            'name' => '3A',
+            'teacher_id' => 3,
+        ]);
+        $class4 = ClassRoom::create([
+            'name' => '4A',
+            'teacher_id' => 4,
+        ]);
     }
 }

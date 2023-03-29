@@ -217,3 +217,12 @@ Maka Dari itu, aku gk bakal bikin branch setiap video melainkan hanya commit bia
 -   Basic nya sama seperti yg kita buat, bisa liat di dokumentasi utk contohnya. Default seperator nya '-', bisa kita ganti juga ke yg lain kalo mau, tapi disini kita pake apa adanya aja. Agak aneh sih krn seblmnya kita pake '\_' tapi skrg jadi '-', tapi ywdhlah.
 -   Solusi yg ditawarkan sluggable ini itu degan mengetahui slug yg sama lalu di increament slugnya, sehingga slug nya jadi beda. Contoh disini aku insert dua kali dgn nama yg sama 'cara fajar', slug yg tersimpan adalah 'cara-fajar' dan 'cara-fajar-2'
 -   Sluggable ini otomatis isi slug kita selama sudah kita panggil di model. Jangan lupa juga utk dihapus slug manual yg sblmnya
+
+### Chunk
+
+-   Mempercepat insert data dengan Array Chunk.
+-   Disini gw mau refresh migration seed biar rapih ke reset.
+-   Hal yang gw tambah atau update teacher seeder, class seeder, student factory dan student seeder serta yg di DatabaseSeeder nya.
+-   Dokumentasi [array_chunk](https://www.php.net/manual/en/function.array-chunk.php).
+-   Abis migrate:fresh --seed kita akan nge test secara seeding student nya db:seed --class=StudentSeeder
+-   Kita bisa liat hasil nya luar biasa jauh, dimana sblmnya nge seed 10000 data butuh bermenit" skrg hanya butuh sedetik.
